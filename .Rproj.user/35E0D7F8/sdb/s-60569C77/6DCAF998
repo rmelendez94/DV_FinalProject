@@ -1,0 +1,18 @@
+{
+    "contents" : "---\ntitle: \"DV_FinalProject\"\noutput: html_document\n---\n\n**Authors: Rolando Melendez, Hyunji Seo, Catherine Tu**\n\n##This is how our RStudio is configured:\n```{r}\nsessionInfo()\n```\n***\n##Program file structure\n  00 Doc - contains .Rmd and .html \n  \n  01 Data - contains the code to Extract, Transform, and Load our data \n  \n  03 Tableau Workbooks - this is where the Tableau workbook(s) goes (twbx format)\n  \n  04 Shiny - contains our workflows and the code for the visualizations along with code used to create Shiny app.\n\n***  \n##Data summary and subset\n```{r}\n#Shows the subset and summary of the data frame\nsource(\"../01 Data/R_ExtractTransform.R\", echo = TRUE)\n```\n```{r}\n#Shows the subset and summary of the data frame\nsource(\"../01 Data/R_ExtractTransformJob.R\", echo = TRUE)\n```\n```{r}\nsource(\"../01 Data/R_Load.R\", echo = TRUE)\n```\n\n####Explanation of Data:\nThis data relates to the direct marketing campaign of a Portuguese bank to have people subscribe to a term deposit at their institution. The campaign had gathered data regard their campaign efforts, individuals' demographics, and external social situations at the time of the campaign. \n",
+    "created" : 1448780305827.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "1292107316",
+    "id" : "6DCAF998",
+    "lastKnownWriteTime" : 1449180978,
+    "path" : "~/Desktop/Desktop/UT/Fall 2015/Data Visualization/DV_FinalProject/00 Doc /RWorkshop.Rmd",
+    "project_path" : "00 Doc /RWorkshop.Rmd",
+    "properties" : {
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 1,
+    "source_on_save" : false,
+    "type" : "r_markdown"
+}

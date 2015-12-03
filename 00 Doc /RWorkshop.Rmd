@@ -1,22 +1,37 @@
 ---
 title: "DV_FinalProject"
-author: "Rolando Melendez, Hyunji Seo, Catherine Tu"
-date: "November 29, 2015"
 output: html_document
 ---
 
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+**Authors: Rolando Melendez, Hyunji Seo, Catherine Tu**
 
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
-
+##This is how our RStudio is configured:
 ```{r}
-summary(cars)
+sessionInfo()
+```
+***
+##Program file structure
+  00 Doc - contains .Rmd and .html 
+  
+  01 Data - contains the code to Extract, Transform, and Load our data 
+  
+  03 Tableau Workbooks - this is where the Tableau workbook(s) goes (twbx format)
+  
+  04 Shiny - contains our workflows and the code for the visualizations along with code used to create Shiny app.
+
+***  
+##Data summary and subset
+```{r}
+#Shows the subset and summary of the data frame
+source("../01 Data/R_ExtractTransform.R", echo = TRUE)
+```
+```{r}
+#Shows the subset and summary of the data frame
+source("../01 Data/R_ExtractTransformJob.R", echo = TRUE)
+```
+```{r}
+source("../01 Data/R_Load.R", echo = TRUE)
 ```
 
-You can also embed plots, for example:
-
-```{r, echo=FALSE}
-plot(cars)
-```
-
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+####Explanation of Data:
+This data relates to the direct marketing campaign of a Portuguese bank to have people subscribe to a term deposit at their institution. The campaign had gathered data regard their campaign efforts, individuals' demographics, and external social situations at the time of the campaign. 
