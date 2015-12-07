@@ -1,6 +1,6 @@
 ---
 title: "DV_FinalProject"
-output: html_document
+output: word_document
 ---
 
 **Authors: Rolando Melendez, Hyunji Seo, Catherine Tu**
@@ -19,7 +19,14 @@ sessionInfo()
   
   04 Shiny - contains our workflows and the code for the visualizations along with code used to create Shiny app.
 
-***  
+***
+
+##Explanation of Data:
+Hyunji's Intro about banking data
+  add sentece(s) about blended data
+  
+***
+
 ##Data summary and subset
 ```{r}
 #Shows the subset and summary of the data frame
@@ -33,5 +40,50 @@ source("../01 Data/R_ExtractTransformJob.R", echo = TRUE)
 source("../01 Data/R_Load.R", echo = TRUE)
 ```
 
-####Explanation of Data:
-This data relates to the direct marketing campaign of a Portuguese bank to have people subscribe to a term deposit at their institution. The campaign had gathered data regard their campaign efforts, individuals' demographics, and external social situations at the time of the campaign. 
+***
+
+##Label Explanations:
+here
+
+***
+
+##Non_Aggregated Measures Analysis: 
+
+####Boxplot:
+words
+
+##Aggregrated Measures Analysis:
+
+####Histogram:
+
+#####Legit Title:
+words
+
+#####Legit Title No 2:
+words
+
+##Scatter Plots:
+
+####Legit Title 1:
+words
+
+####Legit Title No 2:
+words
+
+##Crosstabs:
+
+####Legit Title:
+words
+
+##Barcharts:
+
+####Legit Title 1:
+words
+
+####Legit Title 2:
+*Also demonstrates data blending*
+words
+
+####Legit Title 3:
+words
+

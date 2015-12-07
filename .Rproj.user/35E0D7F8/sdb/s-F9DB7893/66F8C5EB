@@ -1,0 +1,17 @@
+{
+    "contents" : "---\ntitle: \"DV_FinalProject\"\noutput: word_document\n---\n\n**Authors: Rolando Melendez, Hyunji Seo, Catherine Tu**\n\n##This is how our RStudio is configured:\n```{r}\nsessionInfo()\n```\n***\n##Program file structure\n  00 Doc - contains .Rmd and .html \n  \n  01 Data - contains the code to Extract, Transform, and Load our data \n  \n  03 Tableau Workbooks - this is where the Tableau workbook(s) goes (twbx format)\n  \n  04 Shiny - contains our workflows and the code for the visualizations along with code used to create Shiny app.\n\n***\n\n##Explanation of Data:\nHyunji's Intro about banking data\n  add sentece(s) about blended data\n  \n***\n\n##Data summary and subset\n```{r}\n#Shows the subset and summary of the data frame\nsource(\"../01 Data/R_ExtractTransform.R\", echo = TRUE)\n```\n```{r}\n#Shows the subset and summary of the data frame\nsource(\"../01 Data/R_ExtractTransformJob.R\", echo = TRUE)\n```\n```{r}\nsource(\"../01 Data/R_Load.R\", echo = TRUE)\n```\n\n***\n\n##Label Explanations:\nhere\n\n***\n\n##Non_Aggregated Measures Analysis: \n\n####Boxplot:\nwords\n\n##Aggregrated Measures Analysis:\n\n####Histogram:\n\n#####Legit Title:\nwords\n\n#####Legit Title No 2:\nwords\n\n##Scatter Plots:\n\n####Legit Title 1:\nwords\n\n####Legit Title No 2:\nwords\n\n##Crosstabs:\n\n####Legit Title:\nwords\n\n##Barcharts:\n\n####Legit Title 1:\nwords\n\n####Legit Title 2:\n*Also demonstrates data blending*\n\nwords\n\n####Legit Title 3:\nwords\n\n",
+    "created" : 1449526951557.000,
+    "dirty" : true,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "4021478645",
+    "id" : "66F8C5EB",
+    "lastKnownWriteTime" : 1449528159,
+    "path" : "~/Desktop/Desktop/UT/Fall 2015/Data Visualization/DV_FinalProject/00 Doc/RWorkshop.Rmd",
+    "project_path" : "00 Doc/RWorkshop.Rmd",
+    "properties" : {
+    },
+    "relative_order" : 5,
+    "source_on_save" : false,
+    "type" : "r_markdown"
+}
