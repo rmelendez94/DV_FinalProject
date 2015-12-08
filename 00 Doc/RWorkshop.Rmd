@@ -1,6 +1,6 @@
 ---
 title: "DV_FinalProject"
-output: html_document
+output: word_document
 ---
 
 **Authors: Rolando Melendez, Hyunji Seo, Catherine Tu**
