@@ -16,38 +16,44 @@ shinyServer(function(input, output) {
   output$scatterPlot <- renderPlot({
     # Start your code here.
     # Here is the scatter plot
-    if (input$OutcomeSelectionFilter == 1)
-      ofilter = 'no'
-    else if (input$OutcomeSelectionFilter == 2)
-      ofilter = 'yes'
-    else
-      ofilter = 'all'
     
-    dfs <- df %>% select(DURATION, Y, CONS_PRICE_IDX) %>% filter(Y != ofilter)
+    Lower_Tail_Percent = input$LowerTail     
+    Upper_Tail_Percent = input$UpperTail
+    
+    if (input$OutcomeSelectionFilter == 1)
+      ofilter = 'Lower Tail'
+    else if (input$OutcomeSelectionFilter == 2)
+      ofilter = 'Upper Tail'
+    else
+      ofilter = 'All'
+  
+    if(ofilter == 'All')
+      sdf <- df %>% mutate(DURATIONPERCENT = ntile(DURATION, 100)) %>% arrange(DURATIONPERCENT) %>% select(POUTCOME, DURATION, Y, DURATIONPERCENT) 
+    #View(pd) # Uncomment to view the results
+    if(ofilter == 'Lower Tail')
+      #This shows below the 20th percentile for call duration during the Marketing campaign 
+      sdf <- df %>% mutate(DURATIONPERCENT = ntile(DURATION, 100)) %>% arrange(DURATIONPERCENT) %>% select(POUTCOME, DURATION, Y, DURATIONPERCENT) %>% filter(DURATIONPERCENT < Lower_Tail_Percent) 
+    #View(npd) # Uncomment to view the results
+    if(ofilter == 'Upper Tail')
+      #This shows above the 80th percentile for call duration during the Marketing campaign 
+      sdf <- df %>% mutate(DURATIONPERCENT = ntile(DURATION, 100)) %>% arrange(DURATIONPERCENT) %>% select(POUTCOME, DURATION, Y, DURATIONPERCENT) %>% filter(DURATIONPERCENT > Upper_Tail_Percent) 
+    
     
     plot1 <- ggplot() + 
       coord_cartesian() + 
       scale_x_continuous() +
-      scale_y_continuous() +
-      labs(title='Portuguese Bank Marketing Campaign Effectiveness\nScatter Plot') +
-      labs(x="Duration", y=paste("Consumer Price Index")) +
-      layer(data=dfs, 
-            mapping=aes(x=as.numeric(as.character(DURATION)), y=as.numeric(as.character(CONS_PRICE_IDX)), color=Y),
+      scale_y_discrete() +
+      facet_grid(Y~.) +
+      labs(title='Portuguese Bank Marketing Campaign Effectiveness') +
+      labs(x="Duration", y=paste("Past Marketing Effectiveness")) +
+      layer(data=sdf, 
+            mapping=aes(x=as.numeric(as.character(DURATION)), y=as.character(POUTCOME), color=Y), 
             stat="identity",
             stat_params=list(),
             geom="point",
             geom_params=list(alpha=.8), 
-            position=position_jitter(width=0, height=0)
-      ) +
-      layer(data=dfs, 
-            mapping=aes(x=as.numeric(as.character(DURATION)), y=as.numeric(as.character(CONS_PRICE_IDX)), color=Y),
-            stat="smooth",
-            stat_params=list(method= lm, se= FALSE),
-            geom="smooth",
-            geom_params=list(alpha= .8), 
-            position=position_jitter(width=0, height=0)
-        )
-    
+            position=position_jitter(width=0, height=0.3)
+      )
     # End your code here.
     return(plot1)
   })
@@ -56,58 +62,71 @@ shinyServer(function(input, output) {
     # Start your code here.
     # Here is the bar chart
     
-    plottitle = "Portuguese Bank Marketing Campaign Effectiveness\nBar Chart:"
-    dfb <- df %>% group_by(POUTCOME, Y) %>% summarise(AVG_CAMPAIGN = mean(CAMPAIGN))
-    if (input$ReferenceLine == 1) {
-      # Window Avg
-      subtitle = "AVG_CAMPAIGN, WINDOW_AVG_CAMPAIGN"
-      dfb1 <- dfb %>% ungroup %>% group_by(POUTCOME) %>% summarise(measure_value = mean(AVG_CAMPAIGN))}
-    else if (input$ReferenceLine == 2) {
-      # Window Min
-      subtitle = "AVG_CAMPAIGN, WINDOW_MIN_CAMPAIGN"
-      dfb1 <- dfb %>% ungroup %>% group_by(POUTCOME) %>% summarise(measure_value = min(AVG_CAMPAIGN))}
-    else if (input$ReferenceLine == 3) {
-      # Window Max
-      subtitle = "AVG_CAMPAIGN, WINDOW_MAX_CAMPAIGN"
-      dfb1 <- dfb %>% ungroup %>% group_by(POUTCOME) %>% summarise(measure_value = max(AVG_CAMPAIGN))}
-    else {
-      # Window Sum
-      subtitle = "AVG_CAMPAIGN, WINDOW_SUM_CAMPAIGN"
-      dfb1 <- dfb %>% ungroup %>% group_by(POUTCOME) %>% summarise(measure_value = sum(AVG_CAMPAIGN))}
-    dfb <- inner_join(dfb, dfb1, by="POUTCOME")
+    plottitle = "Portuguese Bank Marketing Campaign Effectiveness\nBar Chart Blended:"
+    dfbl <-
+      data.frame(fromJSON(getURL(
+        URLencode(
+          gsub(
+            "\n", " ", 'skipper.cs.utexas.edu:5001/rest/native/?query=
+            """select JOB_TYPE as job_name, \\\'AVERAGE_SALARY\\\' as measure_names, 
+            sum(AVERAGE_SALARY) as measure_values 
+            from JOBTYPE
+            group by JOB_TYPE
+            union all
+            select JOB as job_name, \\\'CAMPAIGN\\\' as measure_names, sum(CAMPAIGN) as measure_values from BNKMKTG
+            group by JOB;"""'
+          )
+          ), httpheader = c(
+            DB = 'jdbc:oracle:thin:@sayonara.microlab.cs.utexas.edu:1521:orcl', USER =
+              'C##cs329e_rm46926', PASS = 'orcl_rm46926', MODE = 'native_mode', MODEL = 'model', returnDimensions = 'False', returnFor = 'JSON'
+        ), verbose = TRUE
+      ))); #View(dfbl)
+    
+    # Rearranges measure_names into usable columns
+   
+    
+    
+    if (input$BarchartSorting == 1) {
+      ndfbl <- spread(dfbl, MEASURE_NAMES, MEASURE_VALUES) %>% arrange(desc(AVERAGE_SALARY))
+      # Creates an ordered column of job type to be used for ordering in ggplot
+      ndfbl$ORDERED_JOBS <- reorder(ndfbl$JOB_NAME, ndfbl$AVERAGE_SALARY)}
+    else if (input$BarchartSorting == 2) {
+      ndfbl <- spread(dfbl, MEASURE_NAMES, MEASURE_VALUES) %>% arrange(desc(CAMPAIGN))
+      # Creates an ordered column of job type to be used for ordering in ggplot
+      ndfbl$ORDERED_JOBS <- reorder(ndfbl$JOB_NAME, ndfbl$CAMPAIGN)}
+
+    #dfb <- inner_join(dfb, dfb1, by="POUTCOME")
     
     #spread(dfb, Y, AVG_CAMPAIGN) %>% View
     
-    plot2 <- ggplot() + 
-      coord_cartesian() + 
+    plot2 <- ggplot() +
+      coord_cartesian() +
       scale_x_discrete() +
-      scale_y_continuous() +
-      facet_wrap(~POUTCOME, ncol=1) +
-      labs(title=paste(plottitle,subtitle,sep = " ")) +
-      labs(x=paste("Y (OUTCOME)"), y=paste("AVG_CAMPAIGN")) +
-      layer(data=dfb, 
-            mapping=aes(x=Y, y=AVG_CAMPAIGN, color=Y, fill=Y), 
-            stat="identity", 
-            stat_params=list(), 
-            geom="bar",
-            geom_params=list(width=.25), 
-            position=position_identity()
-      ) + coord_flip() +
-      layer(data=dfb, 
-            mapping=aes(x=Y, y=measure_value, label=round(measure_value, 4)), 
-            stat="identity", 
-            stat_params=list(), 
-            geom="text",
-            geom_params=list(colour="black", hjust=1.5, size=3.5), 
-            position=position_identity()
+      scale_y_continuous(limits = c(0,100000)) +
+      scale_fill_gradient(low = "grey90", high = "darkgreen", na.value = "grey90", guide = "colourbar") +
+      labs(title = 'Portuguese Bank Marketing Campaign Effectiveness\nBlending') +
+      labs(x = paste("JOB TYPE"), y = paste("AVERAGE SALARY")) +
+      theme(panel.background=element_rect(fill='grey100')) +
+      layer(
+        data = ndfbl,
+        mapping = aes(x = ORDERED_JOBS, y = AVERAGE_SALARY, fill = CAMPAIGN),
+        stat = "identity",
+        stat_params = list(),
+        geom = "bar",
+        geom_params = list(width=.5),
+        position = position_identity()
       ) +
-      layer(data=dfb, 
-            mapping=aes(yintercept = measure_value), 
-            geom="hline",
-            geom_params=list(colour="red")
-      ) 
-    
-    
+      layer(
+        data = ndfbl,
+        mapping = aes(
+          x = ORDERED_JOBS, y = AVERAGE_SALARY, label = round(CAMPAIGN)
+        ),
+        stat = "identity",
+        stat_params = list(),
+        geom = "text",
+        geom_params = list(colour = "black", hjust = -0.1),
+        position = position_identity()
+      ) + coord_flip() 
     # End your code here.
     return(plot2)
   })
