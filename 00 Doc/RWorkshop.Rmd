@@ -43,13 +43,56 @@ source("../01 Data/R_Load.R", echo = TRUE)
 ***
 
 ##Label Explanations:
-here
+AGE - The age of each marketing participant
+
+JOB - Type of job
+
+MARITAL -  Marital Status
+
+EDUCATION - Level of education reached by participant
+
+DEFAULT - Has this participant defaulted before
+
+HOUSING - Does this participant have a housing loan (Mortgage)
+
+LOAN - Does this participant have a personal loan
+
+CONTACT - Contact communication type (cellular or telephone)
+
+MONTH - Last contact month of the year
+
+DAY OF WEEK - Last contact day of the week
+
+DURATION -  Duration of the last contact to the participant
+
+CAMPAIGN - Number of times this participant was contacted during this campaign
+
+PDAYS - Number of days since participant was last contacted
+
+PREVIOUS - Number of times this participant was contacted before this campaign
+
+POUTCOME - Outcome of previous marketing campaign
+
+EMP VAR RATE - Employment variation rate
+
+CONS PRICE IDX - Consumer price index
+
+CONS CONF IDX - Consumer confidence index
+
+EURIBOR3M - Rate at which banks lend to each other; 3 month loans
+
+NR EMPOLOYED - Number of employees
+
+Y - Outcome, Did the participant subscribe to a term deposit
 
 ***
 
 ##Non_Aggregated Measures Analysis: 
 
 ####Boxplot:
+
+![](./Boxplot.jpg)
+
 words
 
 ##Aggregrated Measures Analysis:
@@ -57,34 +100,59 @@ words
 ####Histogram:
 
 #####Legit Title:
+
+![](./Histogram.jpg)
+
 words
 
 #####Legit Title No 2:
+
+![](./Histogram2.jpg)
+
 words
 
 ##Scatter Plots:
 
 ####Legit Title 1:
+
+![](./ScatterPlot)
+
 words
 
 ####Legit Title No 2:
+
+![](./PercentileScatter)
+
 words
 
 ##Crosstabs:
 
 ####Legit Title:
+
+![](./CrosstabKPI.jpg)
+
 words
 
 ##Barcharts:
 
 ####Legit Title 1:
+
+![](./BarchartRLine.jpg)
+
 words
 
 ####Legit Title 2:
 *Also demonstrates data blending*
 
+![](./Blending.jpg)
+
 words
 
 ####Legit Title 3:
+
+![](./CrossBar-No.jpg)
+
+![](./CrossBar-Yes.jpg)
+
 words
 
