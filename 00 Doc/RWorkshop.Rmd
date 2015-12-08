@@ -90,6 +90,15 @@ Y - Outcome, Did the participant subscribe to a term deposit
 ##Non_Aggregated Measures Analysis: 
 
 ####Boxplot:
+1. From the Analysis tab de-select Aggregate Measures.
+
+2. Select AGE in Measures, Click on Box-and-whisker plot in “Show Me”.
+
+3. Drag EDUCATION from Dimensions onto Rows.
+
+4. Drag Y from Dimensions onto Rows, after EDUCATION.
+
+5. Add EDUCATION to Filter, Filter out “Illiterate” and “Unknown”.
 
 ![](./Boxplot.jpg)
 
@@ -100,6 +109,15 @@ words
 ####Histogram:
 
 #####Legit Title:
+1. Right-click AGE in Measures. Click Create>Bins…. Change the Size of Bins to be 8. Click OK.
+
+2. Drag AGE (bin) to Columns.
+
+3. Drag AGE to Rows. Right click on it, click on Measure, and change to Count.
+
+4. Drag Campaign to Rows. Right click on it, click on Measure, and change to Sum.
+
+5. Add Y to Filter. Right-click on Y and click “Show Quick Filter”
 
 ![](./Histogram.jpg)
 
@@ -107,27 +125,58 @@ words
 
 #####Legit Title No 2:
 
+steps
+
 ![](./Histogram2.jpg)
 
 words
 
 ##Scatter Plots:
 
-####Legit Title 1:
+####CPI Scatter Plot:
 
-![](./ScatterPlot)
+1. From the Analysis tab de-select Aggregate Measures.
+
+2. Drag DURATION from Measures onto Columns.
+
+3. Drag CONS PRICE IDX from Measures onto Rows.
+
+4. Right Click the Y-Axis and select Edit Axis.
+
+5. Set to a fixed range of 92-95.
+
+6. Drag Y from Dimensions onto Color.
+
+7. From the Analysis tab select Trend Lines>Show Trend Lines.
+
+8. From the Analysis tab select Trend Lines>Edit Trend Lines and uncheck “Show confidence bands”.
+
+
+![](./ScatterPlot.jpg)
 
 words
 
-####Legit Title No 2:
+####Duration Percentile Scatter Plot:
 
-![](./PercentileScatter)
+1. From the Analysis tab de-select Aggregate Measures.
+
+2. Drag DURATION from Measures onto Columns.
+
+3. Drag Y from Dimensions onto Rows.
+
+4. Drag POUTCOME from Dimensions onto Rows, after Y.
+
+5. Drag Y from Dimensions onto Color.
+
+![](./PercentileScatter.jpg)
 
 words
 
 ##Crosstabs:
 
 ####Legit Title:
+
+steps
 
 ![](./CrosstabKPI.jpg)
 
@@ -137,6 +186,8 @@ words
 
 ####Legit Title 1:
 
+steps
+
 ![](./BarchartRLine.jpg)
 
 words
@@ -144,15 +195,18 @@ words
 ####Legit Title 2:
 *Also demonstrates data blending*
 
+steps
+
 ![](./Blending.jpg)
 
 words
 
 ####Legit Title 3:
 
+steps
+
 ![](./CrossBar-No.jpg)
 
 ![](./CrossBar-Yes.jpg)
 
 words
-
